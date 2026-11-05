@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+const API_BASE = "https://mern-crm-backend-guts.onrender.com";
 
 const Dashboard = () => {
   const [customers, setCustomers] = useState([]);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+const API_BASE = "https://mern-crm-backend-guts.onrender.com/";
 
 const Register = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
