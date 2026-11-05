@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
 const API_BASE = "https://mern-crm-backend-guts.onrender.com";
 
 const Dashboard = () => {
@@ -14,7 +15,7 @@ const Dashboard = () => {
 
   const fetchCustomers = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/customers', config);
+      const res = await axios.get(`${API_BASE}/api/customers`, config);
       setCustomers(res.data);
     } catch (err) {
       if (err.response?.status === 401) {
@@ -35,11 +36,11 @@ const Dashboard = () => {
     e.preventDefault();
     try {
       if (editId) {
-        await axios.put(`http://localhost:5000/api/customers/${editId}`, formData, config);
+        await axios.put(`${API_BASE}/api/customers/${editId}`, formData, config);
         alert('Customer updated successfully!');
         setEditId(null);
       } else {
-        await axios.post('http://localhost:5000/api/customers', formData, config);
+        await axios.post(`${API_BASE}/api/customers`, formData, config);
         alert('Customer added successfully!');
       }
       setFormData({ name: '', email: '', phone: '', company: '', status: 'Lead' });
@@ -57,7 +58,7 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this customer?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/customers/${id}`, config);
+        await axios.delete(`${API_BASE}/api/customers/${id}`, config);
         fetchCustomers();
       } catch (err) {
         alert('Delete failed');
